@@ -3,16 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="Assets/css/style.css"></link>
     <title>Welcome to the Intro to Skate Quiz</title>
 </head>
-<body>
+<body class="container">
     <!-- Link to the top left or wherever to access the highscores page -->
-    
-    
+    <header class="row mt-4 pb-4">
+        <div class="col">
+            <button type="button" class="btn btn-primary btn-lg">View Highscores</button>
+        </div>
+        <div class="col-3">
+            <h2>Time remaining: <span id="timeCount"></span></h2>
+        </div>
+    </header>
+    <main class="mt-4 pt-2">
+        
+        <div id="startingPage" class="visible w-50 mx-auto">
+            <h1>Welcome to the Intro to Skating Quiz!</h1>
+            <p>Answer questions about various skaters and the rise to pro correctly to earn
+                a highscore. Then enter in your name to save your highscore. </p>
+            <div class="row mx-auto">
+                <button id="startQuiz" type="button" class="btn btn-outline-primary mx-auto">Start Quiz</button>
+            </div>
+        </div>
+        <div id="questionPage" class="invisible">
+            <section class="question">
+                <h1></h1>
+            </section>
+            <section class="answers">
+            </section>
+            <section class="wereYouRight">
+                
+            </section>
+        </div>
+        
+    </main>
+
     <script type="text/javascript" src="script.js"></script>
 </body>
 </html>
