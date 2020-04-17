@@ -74,18 +74,14 @@ function setTime() {
   }, 1000);
 }
 
-function moveToNext(){
-    for (var m = 0; m < quizContent.length; m++) {
-        var j = 0;
-        j++;
-    }
-}
+
 
 function createAnswerButtons(){
     for (var i = 0; i < 4; i++){
         answerBtn = document.createElement("Button")
+        answerBtn.setAttribute("class", "btn btn-outline-primary btn-block mx-auto");
         answerBtn.textContent = quizContent[page].answers[i]
-        displayQuestion.appendChild(answerBtn);
+        displayAnswers.appendChild(answerBtn);
     }
 }
 
@@ -94,8 +90,8 @@ function goThroughQuiz(){
         welcomePage.parentNode.removeChild(welcomePage);
         quizPage.setAttribute("class", "visible w-50 mx-auto");
         displayQuestion.children[0].textContent = quizContent[page].question
-        createAnswerButtons();
         setTime();
+        createAnswerButtons();
 
         console.log(quizContent[page].answers[0]);
         console.log(quizContent[page].answers[1]);
@@ -103,11 +99,34 @@ function goThroughQuiz(){
         console.log(quizContent[page + 1].question);
         console.log(quizContent[page + 1].answers[0]);
     })
+    listenForAnswerChoice();
 }
+
+function listenForAnswerChoice(){
+    moveToNext();
+    for (var k = 0; k < 4; k++){
+        displayAnswers.children[k].addEventListener("click", newPage);
+    }
+    alert(page);
+}
+
+ function moveToNext(){
+     for (var m = 0; m < quizContent.length; m++){
+         page++;
+         break;
+     }
+     return page;
+ }
 
 function newPage(){
-
+    console.log("Inside new page function");
+    displayAnswers.parentNode.removeChild(displayAnswers);
+    displayQuestion.children[0].textContent = quizContent[page].question;
+    quizPage.appendChild(displayAnswers);
+    alert(page)
+    createAnswerButtons();
 }
+
 
 var quizContent = [
     {
