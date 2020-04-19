@@ -7,17 +7,23 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="Assets/css/style.css"></link>
     <title>The High Scores Page of the Skate Quiz</title>
 </head>
-<body>
+<body class="container">
     <!-- Title of page -->
     <!-- List of high scores -->
-    <h1>Welcome to the High Scores Page!</h1>
-    <ul class="highScoresList list-group">
+    <div class="row mx-auto">
+        <h1>Welcome to the High Scores Page!</h1>
+    </div>
+    <div id="highScoreBtnSection" class="row mx-auto pb-5">
+        <a href="index.html" class="col-6"><button type="button" class="btn btn-primary btn-lg mt-4">Go back to quiz page.</button></a>
+        <button id="clearScoresBtn" type="button" class="btn btn-primary btn-lg mt-4 col-6">Clear scores</button>
+    </div>
+    <ul class="highScoresList list-group mx-auto">
     
     </ul>
-    <a href="index.html"><button type="button" class="btn btn-primary btn-lg mt-4">Go back to quiz page.</button></a>
-    <button id="clearScoresBtn" type="button" class="btn btn-primary btn-lg mt-4">Clear scores</button>
+
     <script type="text/javascript" src="highScores.js"></script>
 </body>
 </html>

@@ -143,10 +143,12 @@ function finishScreen(){
 function nextPage(event){
     if (event.target.matches("button") && page < quizContent.length -1){
         if (event.target.textContent == quizContent[page].correctAnswer){
-            displayResult.textContent = "That is correct!";
+            displayResult.textContent =  (quizContent[page].question).toString() + " Your answer: " + 
+            (quizContent[page].correctAnswer).toString() + " That is correct!";
         } 
         if (event.target.textContent != quizContent[page].correctAnswer ) {
-            displayResult.textContent = "That is wrong!"
+            displayResult.textContent = (quizContent[page].question).toString() + " Your answer: " + 
+            (event.target.textContent).toString() +" Sorry, that is wrong!"
             secondsLeft = secondsLeft - 10;
         }
         page++;
@@ -168,24 +170,24 @@ function nextPage(event){
 
 var quizContent = [
     {
-        question: "first question",
-        answers: ["answer 1", "answer 2", "answer 3", "answer 4"],
-        correctAnswer: "answer 2"
+        question: "What age did Nyjah Huston win his first Xgames medal?",
+        answers: ["14", "20", "9", "16"],
+        correctAnswer: "14"
     }, 
     {
-        question: "second question",
-        answers: ["answer 11", "answer 12", "answer 13", "answer 14"],
-        correctAnswer: "answer 13"
+        question: "What legendary trick is Tony Hawk famous for being the first to land?",
+        answers: ["Corkside Flip", "Tony Spiral", "The 900", "Hardflip"],
+        correctAnswer: "The 900"
     },
     {
-        question: "third question",
-        answers: ["answer 21", "answer 22", "answer 23", "answer 24"],
-        correctAnswer: "answer 21"
+        question: "Who is credited for eventing the 'Ollie'?",
+        answers: ["Bob Burnquist", "Tony Hawk", "Alan Gelfand", "Chris Cole"],
+        correctAnswer: "Alan Gelfand"
     },
     {
-        question: "fourth question",
-        answers: ["answer 31", "answer 32", "answer 33", "answer 34"],
-        correctAnswer: "answer 34"
+        question: "Who is credited for making street skating as it currently is?",
+        answers: ["Rodney Mullen", "Steve Aoki", "Nyjah Huston", "Bam Margera"],
+        correctAnswer: "Rodney Mullen"
     }
 ]
 

@@ -1,3 +1,20 @@
 header h2 {
     font-size: medium;
 }
+
+#highScoreBtnSection button {
+    height: 50px;
+}
+
+#highScoreBtnSection a {
+    padding: 0;
+}
+
+#clearScoresBtn {
+    background: red;
+}
+
+#clearScoresBtn:hover {
+    border-color: red;
+    border-width: 3px;
+}
