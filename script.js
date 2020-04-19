@@ -53,78 +53,116 @@ var timeCount = document.querySelector("#timeCount");
 var startQuiz = document.querySelector("#startQuiz");
 var welcomePage = document.querySelector("#startingPage");
 var quizPage = document.querySelector("#questionPage");
+var resultPage = document.querySelector("#gameOverPage")
+var result = document.querySelector("wereYouRight");
 var secondsLeft = 100;
 
 var displayQuestion = document.querySelector(".question");
-var displayAnswers = document.querySelector(".answers")
+var displayAnswers = document.querySelector(".answers");
+var displayResult = document.querySelector("#answerStatus"); 
+var yourScore = document.querySelector("#yourScoreHere");
+var enterIntials = document.querySelector("#enterInitials")
+var submitButton = document.querySelector("#submitScore");
+
 var page = 0;
 var content = 0;
-
+var gameScore = 0;
+var getLocalScore =  JSON.parse(localStorage.getItem("highScore")) || [];
 
 function setTime() {
   var timerInterval = setInterval(function() {
     secondsLeft--;
     timeCount.textContent = secondsLeft + " seconds.";
 
-    if(secondsLeft === 0) {
+    if(secondsLeft <= 0) {
       clearInterval(timerInterval);
-      sendMessage(); //change when ready to game over screen
+      finishScreen(); //change when ready to game over screen
     }
 
   }, 1000);
 }
 
 
+            // Add event listener to the container then check the target of the click
+            // and match with the target element of button. Everytime it matches the
+            //target element it should increase the [page] index to the next Number.
 
-function createAnswerButtons(){
-    for (var i = 0; i < 4; i++){
-        answerBtn = document.createElement("Button")
-        answerBtn.setAttribute("class", "btn btn-outline-primary btn-block mx-auto");
-        answerBtn.textContent = quizContent[page].answers[i]
-        displayAnswers.appendChild(answerBtn);
-    }
-}
+            // A function that increments that changes the text content of my buttons.
+            // (note) try if else statement instead of function, if button is clicked and
+            // it is less than the length of my array load new answer set and next question.
+
 
 function goThroughQuiz(){
     startQuiz.addEventListener("click", function(){
         welcomePage.parentNode.removeChild(welcomePage);
         quizPage.setAttribute("class", "visible w-50 mx-auto");
-        displayQuestion.children[0].textContent = quizContent[page].question
         setTime();
-        createAnswerButtons();
+        newPage();
 
-        console.log(quizContent[page].answers[0]);
-        console.log(quizContent[page].answers[1]);
-        console.log("----------------------------");
-        console.log(quizContent[page + 1].question);
-        console.log(quizContent[page + 1].answers[0]);
+        
+    });
+    displayAnswers.addEventListener("click", nextPage);
+}
+
+function newPage(event){
+    displayQuestion.children[0].textContent = quizContent[page].question
+    answerBtn1 = document.createElement("Button")
+    answerBtn2 = document.createElement("Button")
+    answerBtn3 = document.createElement("Button")
+    answerBtn4 = document.createElement("Button")
+    answerBtn1.setAttribute("class", "btn btn-outline-primary btn-block mx-auto");
+    answerBtn2.setAttribute("class", "btn btn-outline-primary btn-block mx-auto");
+    answerBtn3.setAttribute("class", "btn btn-outline-primary btn-block mx-auto");
+    answerBtn4.setAttribute("class", "btn btn-outline-primary btn-block mx-auto");
+    answerBtn1.textContent = quizContent[page].answers[0]
+    answerBtn2.textContent = quizContent[page].answers[1]
+    answerBtn3.textContent = quizContent[page].answers[2]
+    answerBtn4.textContent = quizContent[page].answers[3]
+    displayAnswers.appendChild(answerBtn1);
+    displayAnswers.appendChild(answerBtn2);
+    displayAnswers.appendChild(answerBtn3);
+    displayAnswers.appendChild(answerBtn4);
+
+}
+function finishScreen(){
+    quizPage.parentNode.removeChild(quizPage);
+    // quizPage.setAttribute("class", "invisible w-50 mx-auto");
+    resultPage.setAttribute("class", "visible w-50 mx-auto");
+    submitButton.addEventListener("click", function(event){
+        event.preventDefault();
+        var initials = enterIntials.value;
+        getLocalScore.push({
+            initials: initials, 
+            score: gameScore
+        })
+        localStorage.setItem("highScore", JSON.stringify(getLocalScore));
+        location.href = "highscores.html";
     })
-    listenForAnswerChoice();
+
 }
+function nextPage(event){
+    if (event.target.matches("button") && page < quizContent.length -1){
+        if (event.target.textContent == quizContent[page].correctAnswer){
+            displayResult.textContent = "That is correct!";
+        } 
+        if (event.target.textContent != quizContent[page].correctAnswer ) {
+            displayResult.textContent = "That is wrong!"
+            secondsLeft = secondsLeft - 10;
+        }
+        page++;
+        
+        displayQuestion.children[0].textContent = quizContent[page].question;
+        answerBtn1.textContent = quizContent[page].answers[0];
+        answerBtn2.textContent = quizContent[page].answers[1];
+        answerBtn3.textContent = quizContent[page].answers[2];
+        answerBtn4.textContent = quizContent[page].answers[3];
 
-function listenForAnswerChoice(){
-    moveToNext();
-    for (var k = 0; k < 4; k++){
-        displayAnswers.children[k].addEventListener("click", newPage);
-    }
-    alert(page);
-}
-
- function moveToNext(){
-     for (var m = 0; m < quizContent.length; m++){
-         page++;
-         break;
-     }
-     return page;
- }
-
-function newPage(){
-    console.log("Inside new page function");
-    displayAnswers.parentNode.removeChild(displayAnswers);
-    displayQuestion.children[0].textContent = quizContent[page].question;
-    quizPage.appendChild(displayAnswers);
-    alert(page)
-    createAnswerButtons();
+    } else if (event.target.matches("button") && page < quizContent.length) {
+        finishScreen();
+        gameScore += secondsLeft;
+        secondsLeft = 0;
+    } 
+    yourScore.textContent = gameScore;
 }
 
 
@@ -132,22 +170,22 @@ var quizContent = [
     {
         question: "first question",
         answers: ["answer 1", "answer 2", "answer 3", "answer 4"],
-        correctAnswer: "this answer"
+        correctAnswer: "answer 2"
     }, 
     {
         question: "second question",
-        answers: ["answer 13", "answer 12", "answer 13", "answer 14"],
-        correctAnswer: "this answer"
+        answers: ["answer 11", "answer 12", "answer 13", "answer 14"],
+        correctAnswer: "answer 13"
     },
     {
         question: "third question",
         answers: ["answer 21", "answer 22", "answer 23", "answer 24"],
-        correctAnswer: "this answer"
+        correctAnswer: "answer 21"
     },
     {
         question: "fourth question",
         answers: ["answer 31", "answer 32", "answer 33", "answer 34"],
-        correctAnswer: "this answer"
+        correctAnswer: "answer 34"
     }
 ]
 

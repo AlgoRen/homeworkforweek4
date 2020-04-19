@@ -14,7 +14,7 @@
     <!-- Link to the top left or wherever to access the highscores page -->
     <header class="row mt-4 pb-4">
         <div class="col">
-            <button type="button" class="btn btn-primary btn-lg">View Highscores</button>
+           <a href="highscores.html"><button type="button" class="btn btn-primary btn-lg">View Highscores</button></a>
         </div>
         <div class="col-3">
             <h2>Time remaining: <span id="timeCount"></span></h2>
@@ -37,10 +37,21 @@
             <section class="answers">
             </section>
             <section class="wereYouRight">
-                
+                <h2 id="answerStatus">
+
+                </h2>
             </section>
         </div>
-        
+        <div id="gameOverPage" class="invisible">
+            <section class="announcement">
+                <h1>All done</h1>
+                <h3>Your score is a <span id="yourScoreHere"></span></h3>
+            </section>
+            <section class="saveName">
+                <input id="enterInitials">
+                <button id="submitScore">Submit score</button>
+            </section>
+        </div>
     </main>
 
     <script type="text/javascript" src="script.js"></script>
